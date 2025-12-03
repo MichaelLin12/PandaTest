@@ -1,0 +1,30 @@
+nm -nCpA <obj file> --> gets symbols from obj file(the file that is only compiled with the -c flag)
+https://gcc.gnu.org/onlinedocs/gcc/Directory-Options.html -> useful for searching the whole file
+-c flag in gcc only compiles and does not link
+-I flag for include at the end of include path for compile time
+-iquote for include at the beginning of include path for compile time
+-O0 for no inline
+objcopy --redefine-sym testing=testing_real file.o
+
+Example 2 does not work!!
+Changing the symbols only works if  they are in different
+compilation units. ie. .o files. If this is the case then we can 
+just compile with the -c flag and choose the test copy of the compilation unit always.
+
+There are cases where you call functions in a single compilation unit and we have to deal
+with that. I can write code that will run on build that will automatically copy over the function.
+The idea would be to 1. find the function signature in the given file and 2. run a simple stack algo
+to detect the closing parantheses and  3. use the line number to replace.
+
+The idea would be to use macros to define which file to look at and then find the file in linux.
+This is going to be annoyingly difficult
+------------------------------------------------------------------------------------------------------
+Defining TEST SIGNATURES
+------------------------------------------------------------------------------------------------------
+
+we want a --->
+test case -> TEST_SET(NAME, TEST NAMES)
+test set -> TEST(NAME){}
+
+Off the top of my head, there doesn't seem to be a good way to be like oh lets call this function.
+We should instead use MACROS like Google does. THE ABOVE SHOULD BE GOOD ENOUGH FOR A SMALL SCALE.
